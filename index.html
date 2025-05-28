@@ -1,772 +1,174 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxeHaven Hotels - Luxury Escapes</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            background: #fff7f2;
-            color: #4a3c5e;
-            line-height: 1.6;
-        }
-
-        /* Navigation Bar */
-        nav {
-            background: linear-gradient(to right, #f8b7a1, #d8a7ca);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 1.2rem 3rem;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links li {
-            margin-left: 2.5rem;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background: #f9d7c4;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: #f9d7c4;
-        }
-
-        .cart-icon {
-            font-size: 1.6rem;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #f28d77;
-            color: #fff;
-            border-radius: 50%;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.9rem;
-        }
-
-        /* Mobile Menu */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: #d8a7ca;
-                padding: 1.5rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links li {
-                margin: 1rem 0;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 90vh;
-            background: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(248, 183, 161, 0.3);
-        }
-
-        .hero-content {
-            z-index: 1;
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            animation: zoomIn 1.2s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            color: #fff;
-            margin-bottom: 2rem;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .cta-button {
-            background: #f28d77;
-            color: #fff;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            background: #d86b5a;
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Animations */
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* Products Section */
-        .products {
-            padding: 5rem 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .products h2 {
-            font-family: 'Playfair Display', serif;
-            text-align: center;
-            font-size: 3rem;
-            color: #d86b5a;
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .product-item {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 1.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-            animation: popIn 0.8s ease-out;
-        }
-
-        .product-item h3 {
-            font-family: 'Playfair Display', serif;
-            margin: 1rem 0 0.5rem;
-            color: #4a3c5e;
-        }
-
-        .product-item p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .add-to-cart {
-            background: #d8a7ca;
-            color: #fff;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .add-to-cart:hover {
-            background: #b68cb1;
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 1024px) {
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* About Section */
-        .about {
-            padding: 5rem 3rem;
-            background: linear-gradient(to bottom, #fff7f2, #f9e1d9);
-            text-align: center;
-        }
-
-        .about h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: #d86b5a;
-            margin-bottom: 1.5rem;
-        }
-
-        .about p {
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 3rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact h2 {
-            font-family: 'Playfair Display', serif;
-            text-align: center;
-            font-size: 3rem;
-            color: #d86b5a;
-            margin-bottom: 2rem;
-        }
-
-        .contact form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            background: #fffWire transfers, color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact input,
-        .contact textarea {
-            padding: 1rem;
-            border: 2px solid #f9d7c4;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .contact input:focus,
-        .contact textarea:focus {
-            border-color: #d86b5a;
-            box-shadow: 0 0 8px rgba(216, 107, 90, 0.3);
-            outline: none;
-        }
-
-        .contact button {
-            background: #f28d77;
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact button:hover {
-            background: #d86b5a;
-            transform: translateY(-3px);
-        }
-
-        #contact-message {
-            margin-top: 1rem;
-            text-align: center;
-            color: #d86b5a;
-            display: none;
-            animation: popIn 0.5s ease-out;
-        }
-
-        /* Cart Modal */
-        .cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cart-content {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: popIn 0.5s ease-out;
-        }
-
-        .cart-content h2 {
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 1.5rem;
-            color: #d86b5a;
-        }
-
-        .cart-items {
-            margin-bottom: 1.5rem;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem;
-            border-bottom: 1px solid #f9d7c4;
-            transition: background 0.3s;
-        }
-
-        .cart-item:hover {
-            background: #f9e1d9;
-        }
-
-        .cart-item button {
-            background: #f28d77;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .cart-item button:hover {
-            background: #d86b5a;
-        }
-
-        .cart-total {
-            font-weight: bold;
-            margin: 1.5rem 0;
-            color: #d86b5a;
-            font-size: 1.2rem;
-        }
-
-        .cart-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .cart-form input {
-            padding: 1rem;
-            border: 2px solid #f9d7c4;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .cart-form input:focus {
-            border-color: #d86b5a;
-            outline: none;
-        }
-
-        .cart-form button {
-            background: #f28d77;
-            color: #fff;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cart-form button:hover {
-            background: #d86b5a;
-            transform: translateY(-3px);
-        }
-
-        #cart-message {
-            margin-top: 1rem;
-            text-align: center;
-            color: #d86b5a;
-            display: none;
-            animation: popIn 0.5s ease-out;
-        }
-
-        .close-cart {
-            background: #f9d7c4;
-            color: #4a3c5e;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: background 0.3s;
-        }
-
-        .close-cart:hover {
-            background: #f5c1a9;
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(to right, #f8b7a1, #d8a7ca);
-            color: #fff;
-            text-align: center;
-            padding: 3rem;
-        }
-
-        footer p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .social-links a {
-            color: #fff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #f9d7c4;
-            transform: rotate(10deg);
-        }
-    </style>
+    <title>GlowBeauty - Premium Beauty Products</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">LuxeHaven Hotels</div>
-            <div class="menu-toggle">☰</div>
-            <ul class="nav-links">
+    <header>
+        <div class="logo">
+            <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=100&auto=format&fit=crop" alt="GlowBeauty Logo">
+        </div>
+        <nav>
+            <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#products">Destinations</a></li>
+                <li><a href="#products">Products</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li>
-                    <div class="cart-icon">
-                        🛎️ <span class="cart-count">0</span>
+                    <div class="cart-icon" onclick="toggleCart()">
+                        Cart <span class="cart-count" id="cart-count">0</span>
                     </div>
                 </li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>LuxeHaven Hotels</h1>
-            <p>Escape to unparalleled luxury with our exclusive destinations.</p>
-            <a href="#products" class="cta-button">Book Now</a>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="products">
-        <h2>Our Luxe Destinations</h2>
-        <div class="product-grid">
-            <div class="product-item" data-price="600">
-                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32" alt="Parisian Elegance">
-                <h3>Parisian Elegance</h3>
-                <p>A romantic retreat in the heart of Paris.</p>
-                <p>$600/night</p>
-                <button class="add-to-cart">Book Now</button>
-            </div>
-            <div class="product-item" data-price="550">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="Tropical Bliss">
-                <h3>Tropical Bliss</h3>
-                <p>Serene beachfront luxury in Bali.</p>
-                <p>$550/night</p>
-                <button class="add-to-cart">Book Now</button>
-            </div>
-            <div class="product-item" data-price="480">
-                <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9" alt="Alpine Dream">
-                <h3>Alpine Dream</h3>
-                <p>Cozy elegance in the Swiss Alps.</p>
-                <p>$480/night</p>
-                <button class="add-to-cart">Book Now</button>
-            </div>
-            <div class="product-item" data-price="650">
-                <img src="4.jpg" alt="Starlight Suite">
-                <h3>Starlight Suite</h3>
-                <p>Opulent penthouse in Dubai.</p>
-                <p>$650/night</p>
-                <button class="add-to-cart">Book Now</button>
-            </div>
-            <div class="product-item" data-price="500">
-                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4" alt="Coastal Charm">
-                <h3>Coastal Charm</h3>
-                <p>Seaside serenity in Santorini.</p>
-                <p>$500/night</p>
-                <button class="add-to-cart">Book Now</button>
-            </div>
-            <div class="product-item" data-price="450">
-                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6" alt="Urban Bloom">
-                <h3>Urban Bloom</h3>
-                <p>Modern luxury in New York City.</p>
-                <p>$450/night</p>
-                <button class="add-to-cart">Book Now</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About LuxeHaven Hotels</h2>
-        <p>LuxeHaven Hotels redefines luxury hospitality. Our properties blend timeless elegance with modern comfort, offering unforgettable experiences across the globe. Escape to a world of sophistication and serenity with our curated destinations.</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Get in Touch</h2>
-        <form id="contact-form">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Inquiry (e.g., Reservations, Events)" rows="5" required></textarea>
-            <button type="submit">Send Inquiry</button>
-        </form>
-        <p id="contact-message">Thank you for your inquiry!</p>
-    </section>
-
-    <!-- Cart Modal -->
-    <div class="cart-modal">
-        <div class="cart-content">
-            <h2>Your Luxe Bookings</h2>
-            <div class="cart-items"></div>
-            <div class="cart-total">Total: $0</div>
-            <form class="cart-form">
-                <input type="text" id="cart-name" placeholder="Guest Name" required>
-                <input type="email" id="cart-email" placeholder="Guest Email" required>
-                <button type="submit">Confirm Booking</button>
-            </form>
-            <p id="cart-message">Booking confirmed successfully!</p>
-            <button class="close-cart">Close</button>
+    <div id="home" class="hero">
+        <div>
+            <h1>GlowBeauty</h1>
+            <p>Discover the Secret to Radiant Skin</p>
+            <a href="#products" class="btn">Shop Now</a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 LuxeHaven Hotels. All rights reserved.</p>
-        <div class="social-links">
-            <a href="https://www.facebook.com/Rencedelatina">Instagram</a>
-            <a href="https://www.facebook.com/Rencedelatina">Pinterest</a>
-            <a href="https://www.facebook.com/Rencedelatina">Twitter</a>
+    <div class="container">
+        <section id="products" class="products">
+            <h2>Our Best Sellers</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="1.jpg" alt="Moisturizer">
+                    <h3>HydraGlow Moisturizer</h3>
+                    <p>Deep hydration for all-day glow.</p>
+                    <p class="price">₱1739.42</p>
+                    <button class="btn add-to-cart" data-item="HydraGlow Moisturizer" data-price="1739.42">Add to Cart</button>
+                    <button class="btn remove-btn remove-from-cart" data-item="HydraGlow Moisturizer">Remove</button>
+                </div>
+                <div class="product-card">
+                    <img src="2.jpg" alt="Serum">
+                    <h3>Radiance Serum</h3>
+                    <p>Boost your skin's natural radiance.</p>
+                    <p class="price">₱2029.42</p>
+                    <button class="btn add-to-cart" data-item="Radiance Serum" data-price="2029.42">Add to Cart</button>
+                    <button class="btn remove-btn remove-from-cart" data-item="Radiance Serum">Remove</button>
+                </div>
+                <div class="product-card">
+                    <img src="3.jpg" alt="Cleanser">
+                    <h3>PureClean Cleanser</h3>
+                    <p>Gentle cleansing for a fresh feel.</p>
+                    <p class="price">₱1449.42</p>
+                    <button class="btn add-to-cart" data-item="PureClean Cleanser" data-price="1449.42">Add to Cart</button>
+                    <button class="btn remove-btn remove-from-cart" data-item="PureClean Cleanser">Remove</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2>About GlowBeauty</h2>
+                <p>We are a premium beauty brand dedicated to creating high-quality, natural products that enhance your skin's natural glow. Our mission is to empower everyone to feel confident in their own skin with our carefully crafted skincare solutions.</p>
+                <p>Founded in 2020, GlowBeauty has quickly become a trusted name in the beauty industry, known for our commitment to sustainability and ethical sourcing.</p>
+                <a href="#products" class="btn">Shop Our Products</a>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&auto=format&fit=crop" alt="Beauty Products">
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial active">
+                    <p>"GlowBeauty products have transformed my skincare routine! The HydraGlow Moisturizer leaves my skin feeling so hydrated and radiant."</p>
+                    <h4>Emma S.</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"I love the Radiance Serum! It’s lightweight, absorbs quickly, and gives my skin a natural glow. Highly recommend!"</p>
+                    <h4>Sophia L.</h4>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prev-testimonial">←</button>
+                    <button id="next-testimonial">→</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="contact-container">
+                <h2>Contact Us</h2>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i>📍</i>
+                        <p>Bunawan, Agusan Del Sur</p>
+                    </div>
+                    <div class="info-item">
+                        <i>📞</i>
+                        <p>0912235678</p>
+                    </div>
+                    <div class="info-item">
+                        <i>✉️</i>
+                        <p>sandyysssglowbeuatyyyioy.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <button class="close-btn" onclick="toggleCart()">×</button>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-empty" class="cart-empty">Your cart is empty!</p>
+            <div class="cart-total">Total: ₱<span id="cart-total">0.00</span></div>
+            <button class="btn" id="order-now" disabled>Order Now</button>
         </div>
+    </div>
+
+    <div class="order-modal" id="order-modal">
+        <div class="order-content">
+            <button class="close-btn" onclick="toggleOrderModal()">×</button>
+            <h2>Delivery Details</h2>
+            <form id="order-form" class="order-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="address" placeholder="Delivery Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="notes" placeholder="Additional Notes (Optional)" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn">Confirm Order</button>
+            </form>
+            <p id="order-feedback" class="order-feedback">Order placed successfully!</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/sandy.sevilla.125" target="_blank">Facebook</a>
+                <a href="https://www.facebook.com/sandy.sevilla.125" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/sandy.sevilla.125" target="_blank">Twitter</a>
+            </div>
+        </div>
+        <p class="footer-text">© 2025 GlowBeauty. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                if (window.innerWidth <= 768) {
-                    document.querySelector('.nav-links').classList.remove('active');
-                }
-            });
-        });
-
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Cart Functionality
-        const cartIcon = document.querySelector('.cart-icon');
-        const cartModal = document.querySelector('.cart-modal');
-        const closeCart = document.querySelector('.close-cart');
-        const cartItemsContainer = document.querySelector('.cart-items');
-        const cartTotal = document.querySelector('.cart-total');
-        const cartForm = document.querySelector('.cart-form');
-        const cartMessage = document.getElementById('cart-message');
-        const cartCount = document.querySelector('.cart-count');
-        let cart = [];
-
-        function updateCart() {
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price;
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <span>${item.name} - $${item.price}/night</span>
-                    <button onclick="removeFromCart(${index})">Remove</button>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-            });
-            cartTotal.textContent = `Total: $${total}`;
-            cartCount.textContent = cart.length;
-        }
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCart();
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const item = button.parentElement;
-                const name = item.querySelector('h3').textContent;
-                const price = parseInt(item.getAttribute('data-price'));
-                addToCart(name, price);
-            });
-        });
-
-        cartIcon.addEventListener('click', () => {
-            cartModal.style.display = 'flex';
-        });
-
-        closeCart.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-        });
-
-        cartForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('cart-name').value.trim();
-            const email = document.getElementById('cart-email').value.trim();
-
-            if (name && email && cart.length > 0) {
-                cartMessage.style.display = 'block';
-                cart = [];
-                updateCart();
-                cartForm.reset();
-                setTimeout(() => {
-                    cartMessage.style.display = 'none';
-                    cartModal.style.display = 'none';
-                }, 3000);
-            } else {
-                alert('Please fill in all fields and add bookings to the cart.');
-            }
-        });
-
-        // Contact Form
-        const contactForm = document.getElementById('contact-form');
-        const contactMessage = document.getElementById('contact-message');
-
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-
-            if (name && email && message) {
-                contactMessage.style.display = 'block';
-                contactForm.reset();
-                setTimeout(() => {
-                    contactMessage.style.display = 'none';
-                }, 3000);
-            } else {
-                alert('Please fill in all fields.');
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
