@@ -1,0 +1,174 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowBeauty - Premium Beauty Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=100&auto=format&fit=crop" alt="GlowBeauty Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <div class="cart-icon" onclick="toggleCart()">
+                        Cart <span class="cart-count" id="cart-count">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="home" class="hero">
+        <div>
+            <h1>GlowBeauty</h1>
+            <p>Discover the Secret to Radiant Skin</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="products" class="products">
+            <h2>Our Best Sellers</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="1.jpg" alt="Moisturizer">
+                    <h3>HydraGlow Moisturizer</h3>
+                    <p>Deep hydration for all-day glow.</p>
+                    <p class="price">₱1739.42</p>
+                    <button class="btn add-to-cart" data-item="HydraGlow Moisturizer" data-price="1739.42">Add to Cart</button>
+                    <button class="btn remove-btn remove-from-cart" data-item="HydraGlow Moisturizer">Remove</button>
+                </div>
+                <div class="product-card">
+                    <img src="2.jpg" alt="Serum">
+                    <h3>Radiance Serum</h3>
+                    <p>Boost your skin's natural radiance.</p>
+                    <p class="price">₱2029.42</p>
+                    <button class="btn add-to-cart" data-item="Radiance Serum" data-price="2029.42">Add to Cart</button>
+                    <button class="btn remove-btn remove-from-cart" data-item="Radiance Serum">Remove</button>
+                </div>
+                <div class="product-card">
+                    <img src="3.jpg" alt="Cleanser">
+                    <h3>PureClean Cleanser</h3>
+                    <p>Gentle cleansing for a fresh feel.</p>
+                    <p class="price">₱1449.42</p>
+                    <button class="btn add-to-cart" data-item="PureClean Cleanser" data-price="1449.42">Add to Cart</button>
+                    <button class="btn remove-btn remove-from-cart" data-item="PureClean Cleanser">Remove</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2>About GlowBeauty</h2>
+                <p>We are a premium beauty brand dedicated to creating high-quality, natural products that enhance your skin's natural glow. Our mission is to empower everyone to feel confident in their own skin with our carefully crafted skincare solutions.</p>
+                <p>Founded in 2020, GlowBeauty has quickly become a trusted name in the beauty industry, known for our commitment to sustainability and ethical sourcing.</p>
+                <a href="#products" class="btn">Shop Our Products</a>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&auto=format&fit=crop" alt="Beauty Products">
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial active">
+                    <p>"GlowBeauty products have transformed my skincare routine! The HydraGlow Moisturizer leaves my skin feeling so hydrated and radiant."</p>
+                    <h4>Emma S.</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"I love the Radiance Serum! It’s lightweight, absorbs quickly, and gives my skin a natural glow. Highly recommend!"</p>
+                    <h4>Sophia L.</h4>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prev-testimonial">←</button>
+                    <button id="next-testimonial">→</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="contact-container">
+                <h2>Contact Us</h2>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i>📍</i>
+                        <p>Bunawan, Agusan Del Sur</p>
+                    </div>
+                    <div class="info-item">
+                        <i>📞</i>
+                        <p>0912235678</p>
+                    </div>
+                    <div class="info-item">
+                        <i>✉️</i>
+                        <p>sandyysssglowbeuatyyyioy.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <button class="close-btn" onclick="toggleCart()">×</button>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-empty" class="cart-empty">Your cart is empty!</p>
+            <div class="cart-total">Total: ₱<span id="cart-total">0.00</span></div>
+            <button class="btn" id="order-now" disabled>Order Now</button>
+        </div>
+    </div>
+
+    <div class="order-modal" id="order-modal">
+        <div class="order-content">
+            <button class="close-btn" onclick="toggleOrderModal()">×</button>
+            <h2>Delivery Details</h2>
+            <form id="order-form" class="order-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="address" placeholder="Delivery Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="notes" placeholder="Additional Notes (Optional)" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn">Confirm Order</button>
+            </form>
+            <p id="order-feedback" class="order-feedback">Order placed successfully!</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/sandy.sevilla.125" target="_blank">Facebook</a>
+                <a href="https://www.facebook.com/sandy.sevilla.125" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/sandy.sevilla.125" target="_blank">Twitter</a>
+            </div>
+        </div>
+        <p class="footer-text">© 2025 GlowBeauty. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
